@@ -15,9 +15,13 @@ export function useWeather(location) {
   useEffect(
     function () {
       async function fetchWeatherData() {
-        if (location.length < 2) return setWeather({});
+        if (location.length < 2) {
+          setWeather({});
+          return;
+        }
         try {
           setIsLoading(true);
+
           // 1) Getting location (geocoding)
           const geoRes = await fetch(
             `https://geocoding-api.open-meteo.com/v1/search?name=${location}`
